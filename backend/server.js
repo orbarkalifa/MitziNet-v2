@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Add this line to import cors
+
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cors()); // Add this line to use cors
+
 
 // Connect to MongoDB 
 mongoose.connect('mongodb+srv://Student:webdev2024student@cluster0.uqyflra.mongodb.net/webdev2024')
