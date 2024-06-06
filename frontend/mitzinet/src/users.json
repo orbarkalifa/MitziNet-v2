@@ -1,0 +1,16 @@
+[
+    {
+        "email": "string",
+        "password": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "phone": "string"
+    },
+    {
+        "email": "string2",
+        "password": "string2",
+        "firstName": "string2",
+        "lastName": "string2",
+        "phone": "string2"
+    }
+]

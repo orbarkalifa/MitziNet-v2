@@ -1,0 +1,81 @@
+/* Or Bar Califa 318279429
+Daniel Tselon Fradkin 316410885 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 600px;
+    width: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.names {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: max-content;
+}
+
+label {
+    display: block;
+}
+
+input {
+    width: 70%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+.names input {
+    width: auto;
+}
+input:hover {
+    border-color: orange;
+}
+
+.sign-up-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.sign-up-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    .container {
+        max-width: auto;
+        padding: 10px;
+    }
+
+    .names {
+        flex-direction: column;
+        display: contents;
+    }
+}
