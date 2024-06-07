@@ -27,8 +27,7 @@ function SignUp() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-        })
-            .catch(error => console.error('Error:', error));
+        }).catch(error => console.error('Error:', error));
 
 
     };
