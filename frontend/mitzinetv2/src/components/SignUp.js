@@ -35,8 +35,50 @@ function SignUp() {
     const validateEmail = (email) => {
         const atIndex = email.indexOf('@');
         const dotIndex = email.lastIndexOf('.');
+
         return atIndex > 0 && dotIndex > atIndex + 1 && dotIndex < email.length - 1;
     };
+
+    const checkEmail = async (email) => {
+        try {
+            const response = await fetch(`/validate-email?email=${email}`);
+            return response.status === 200; // Return true only if the response status is 200
+        } catch (error) {
+            console.error('Error checking email:', error);
+            return false; // Return false in case of error
+        }
+    };
+
+    const handleBlur = async (e) => {
+        const { name, value } = e.target;
+        if (name === 'email') {
+            const emailValid = await checkEmail(value);
+            if (!emailValid) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    [name]: 'Email already exists'
+                }));
+            } else {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    [name]: '' // Clear error message if email is valid
+                }));
+            }
+        }
+    };
+
+    // In the JSX, update onBlur to call handleBlur
+    <input
+        type="email"
+        id="email"
+        name="email"
+        value={data.email}
+        required
+        onChange={handleChange}
+        onBlur={handleBlur} // Update onBlur to call handleBlur function
+        style={{ borderColor: errors.email ? 'red' : '' }}
+    />;
+
 
     const validateName = (name) => {
         const nameRegex = /^[a-zA-Z\s]*$/;
@@ -51,7 +93,7 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            fetch('http://localhost:8080/signup', {
+            fetch('/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -118,6 +160,7 @@ function SignUp() {
                         value={data.email}
                         required
                         onChange={handleChange}
+                        onBlur={handleBlur}
                         style={{ borderColor: errors.email ? 'red' : '' }}
                     />
                     {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
