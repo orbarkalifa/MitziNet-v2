@@ -1,7 +1,9 @@
+/* Or Bar Califa 318279429
+Daniel Tselon Fradkin 316410885 */
+
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 
 const DeleteMeModal = ({ show, onHide }) => {

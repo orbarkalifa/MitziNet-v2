@@ -1,3 +1,6 @@
+/* Or Bar Califa 318279429
+Daniel Tselon Fradkin 316410885 */
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
@@ -24,7 +27,6 @@ const userSchema = new mongoose.Schema({
         required: true,
     }
 }, { collection: 'mitzinet_Or_Daniel' });
-
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
