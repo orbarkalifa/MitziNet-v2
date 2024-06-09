@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "client": "cd frontend/mitzinetv2 && npm run start",
+        "server": "cd backend && nodemon server.js",
+        "start": "concurrently \"npm run client\" \"npm run server\"",
+        "postinstall": "cd frontend/mitzinetv2 && npm install && cd ../../backend && npm install"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}

@@ -14,6 +14,7 @@ function SignUp() {
         phone: ""
     });
 
+
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {

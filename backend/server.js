@@ -7,7 +7,6 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const User = require('./models/User');
 
-
 const app = express();
 
 // Middleware
