@@ -67,6 +67,16 @@ input:hover {
     background-color: #0056b3;
 }
 
+.sign-up-btn.disabled {
+    background-color: #cccccc; /* Grey color */
+    color: #999999; /* Grey text color */
+    cursor: not-allowed; /* Change cursor when disabled */
+}
+
+.sign-up-btn.disabled:hover {
+    background-color: #cccccc; /* Keep background color grey on hover */
+}
+
 /* Responsive styles */
 @media screen and (max-width: 600px) {
     .container {

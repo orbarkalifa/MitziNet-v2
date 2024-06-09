@@ -1,7 +1,13 @@
-import './SignUp.css';
 import { useState } from 'react';
+import DeleteMeModal from './DeleteMeModal';
+import './SignUp.css';
+
+
+
+
 
 function SignUp() {
+    const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -45,6 +51,7 @@ function SignUp() {
             return response.status === 200; // Return true only if the response status is 200
         } catch (error) {
             console.error('Error checking email:', error);
+            setErrors(...errors, error.email = "Email already exists");
             return false; // Return false in case of error
         }
     };
@@ -67,19 +74,6 @@ function SignUp() {
         }
     };
 
-    // In the JSX, update onBlur to call handleBlur
-    <input
-        type="email"
-        id="email"
-        name="email"
-        value={data.email}
-        required
-        onChange={handleChange}
-        onBlur={handleBlur} // Update onBlur to call handleBlur function
-        style={{ borderColor: errors.email ? 'red' : '' }}
-    />;
-
-
     const validateName = (name) => {
         const nameRegex = /^[a-zA-Z\s]*$/;
         return nameRegex.test(name);
@@ -100,9 +94,20 @@ function SignUp() {
                 },
                 body: JSON.stringify(data),
             })
-                .catch(error => console.error('Error:', error));
+                .then(res => {
+                    if (res.status === 201) {
+                        alert("Registration successful");
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert(error.body);
+                });
         }
     };
+
+
+
 
     return (
         <main className="sign-up-container">
@@ -192,14 +197,24 @@ function SignUp() {
                     />
                     {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                 </div>
-                <button type="submit" className="sign-up-btn">Sign Up</button>
+                <button
+                    type="submit"
+                    className={`sign-up-btn ${errors.email ? 'disabled' : ''}`} // Add 'disabled' class when button is disabled
+                    disabled={errors.email}
+                >Sign Up</button>
             </form>
             <footer>
-                <p>First Name: {data.firstName}</p>
-                <p>Last Name: {data.lastName}</p>
-                <p>Email: {data.email}</p>
-                <p>Phone: {data.phone}</p>
+                <br />
+                <div>
+                    <button onClick={() => setShowModal(true)} className="sign-up-btn">
+                        Delete me from db
+                    </button>
+
+                </div>
+                <DeleteMeModal show={showModal} onHide={() => setShowModal(false)} />
             </footer>
+
+
         </main>
     );
 }
