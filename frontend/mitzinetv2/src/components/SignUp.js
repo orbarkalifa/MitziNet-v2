@@ -3,9 +3,6 @@ import DeleteMeModal from './DeleteMeModal';
 import './SignUp.css';
 
 
-
-
-
 function SignUp() {
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState({
