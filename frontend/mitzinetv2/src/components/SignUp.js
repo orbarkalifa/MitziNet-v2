@@ -6,12 +6,12 @@ import './SignUp.css';
 function SignUp() {
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState({
-        email: "",
-        password: "",
-        confirmPassword: "",
         firstName: "",
         lastName: "",
-        phone: ""
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
     });
 
 
@@ -95,16 +95,20 @@ function SignUp() {
                 .then(res => {
                     if (res.status === 201) {
                         alert("Registration successful");
+                    } else if (res.status === 422) {
+                        return res.json().then(error => {
+                            alert(`Error: ${error.message}`);
+                        });
+                    } else {
+                        alert("An unexpected error occurred");
                     }
                 })
-                .catch(error => {
-                    console.log(error);
-                    alert(error.body);
+                .catch(err => {
+                    alert("Failed to connect to the server");
+                    console.error(err);
                 });
         }
     };
-
-
 
 
     return (

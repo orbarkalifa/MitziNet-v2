@@ -18,13 +18,14 @@ const userSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
+        required: true
     },
     lastName: {
         type: String,
+        required: true
     },
     phone: {
-        type: String,
-        required: true,
+        type: String
     }
 }, { collection: 'mitzinet_Or_Daniel' });
 const User = mongoose.model('User', userSchema);

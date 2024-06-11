@@ -28,7 +28,13 @@ const DeleteMeModal = ({ show, onHide }) => {
             body: JSON.stringify(data),
         }).then(res => {
             if (res.status === 200) {
-                alert("DELETED SUCCESSFULY");
+                alert("User deleted successfuly.");
+            } else if (res.status === 404) {
+                alert("Email not found.");
+            } else if (res.status === 401) {
+                alert("Password does not match.");
+            } else {
+                alert("Server error.");
             }
         });
     };

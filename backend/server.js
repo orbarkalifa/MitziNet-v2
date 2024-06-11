@@ -48,6 +48,17 @@ const validatePhoneNumber = (phone) => {
 
 // Endpoint to handle user signup
 app.post("/signup", (req, res) => {
+    const { firstName, lastName } = req.body;
+    console.log(req.body);
+
+    if (!firstName) {
+        return res.status(422).json({ message: "First name is required" });
+    }
+
+    if (!lastName) {
+        return res.status(422).json({ message: "Last name is required" });
+    }
+
     if (validate(req.body)) {
         const newUser = new User(req.body);
 
@@ -60,13 +71,11 @@ app.post("/signup", (req, res) => {
             newUser.save()
                 .then(user => res.status(201).json(user))
                 .catch(err => res.status(500).json({ message: 'Internal server error', err }));
-
         });
     } else {
         res.status(422).json({ message: "bad input" });
     }
 });
-
 
 
 app.delete("/signup", (req, res) => {
