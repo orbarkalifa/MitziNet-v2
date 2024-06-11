@@ -36,13 +36,11 @@ const validateEmail = (email) => {
 
     return atIndex > 0 && dotIndex > atIndex + 1 && dotIndex < email.length - 1;
 };
-
 // Helper function to validate name format
 const validateName = (name) => {
     const nameRegex = /^[a-zA-Z\s]+$/;
     return nameRegex.test(name);
 };
-
 // Helper function to validate phone number format
 const validatePhoneNumber = (phone) => {
     const phoneRegex = /^\d*$/;
@@ -52,7 +50,7 @@ const validatePhoneNumber = (phone) => {
 // Endpoint to handle user signup
 app.post("/signup", (req, res) => {
     const { firstName, lastName } = req.body;
-    console.log(req.body);
+    console.log(`Registration request: ${req.body}`);
 
     // Validate required fields
     if (!firstName) {
@@ -85,6 +83,8 @@ app.post("/signup", (req, res) => {
 // Endpoint to handle user deletion
 app.delete("/signup", (req, res) => {
     const { email, password } = req.body;
+
+    console.log(`User deletion request: ${req.body}`);
 
     // Find user by email
     User.findOne({ email }).exec()

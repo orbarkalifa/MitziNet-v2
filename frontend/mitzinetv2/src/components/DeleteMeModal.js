@@ -6,7 +6,10 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const DeleteMeModal = ({ show, onHide }) => {
-    const [data, setData] = useState({});  // State to hold form data
+    const [data, setData] = useState({
+        email: '',
+        password: ''
+    });  // State to hold form data
 
     // Handler to update state with form input values
     const handleChange = (e) => {
