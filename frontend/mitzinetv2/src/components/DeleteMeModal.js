@@ -5,11 +5,10 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 const DeleteMeModal = ({ show, onHide }) => {
+    const [data, setData] = useState({});  // State to hold form data
 
-    const [data, setData] = useState({});
-
+    // Handler to update state with form input values
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -18,6 +17,7 @@ const DeleteMeModal = ({ show, onHide }) => {
         }));
     };
 
+    // Handler to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch('/signup', {
@@ -28,19 +28,19 @@ const DeleteMeModal = ({ show, onHide }) => {
             body: JSON.stringify(data),
         }).then(res => {
             if (res.status === 200) {
-                alert("User deleted successfuly.");
+                alert("User deleted successfully.");  // Success response
             } else if (res.status === 404) {
-                alert("Email not found.");
+                alert("Email not found.");  // Email not found response
             } else if (res.status === 401) {
-                alert("Password does not match.");
+                alert("Password does not match.");  // Password mismatch response
             } else {
-                alert("Server error.");
+                alert("Server error.");  // General server error response
             }
         });
     };
 
-
     return (
+        // Modal for delete confirmation
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>Delete me from db</Modal.Title>
@@ -55,7 +55,7 @@ const DeleteMeModal = ({ show, onHide }) => {
                             name="email"
                             value={data.email}
                             required
-                            onChange={handleChange}
+                            onChange={handleChange}  // Update state on input change
                         />
                     </div>
                     <div className="form-group">
@@ -66,7 +66,7 @@ const DeleteMeModal = ({ show, onHide }) => {
                             name="password"
                             value={data.password}
                             required
-                            onChange={handleChange}
+                            onChange={handleChange}  // Update state on input change
                         />
                     </div>
                 </Form>
@@ -75,7 +75,6 @@ const DeleteMeModal = ({ show, onHide }) => {
                 <Button variant="primary" onClick={handleSubmit}>
                     DELETE
                 </Button>
-
             </Modal.Footer>
         </Modal>
     );

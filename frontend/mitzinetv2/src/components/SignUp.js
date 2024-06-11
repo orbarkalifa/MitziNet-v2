@@ -1,10 +1,15 @@
+/* Or Bar Califa 318279429
+Daniel Tselon Fradkin 316410885 */
+
 import { useState } from 'react';
 import DeleteMeModal from './DeleteMeModal';
 import './SignUp.css';
 
-
 function SignUp() {
+    // State for controlling the modal visibility
     const [showModal, setShowModal] = useState(false);
+
+    // State for holding form data
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -14,9 +19,10 @@ function SignUp() {
         confirmPassword: ""
     });
 
-
+    // State for holding form validation errors
     const [errors, setErrors] = useState({});
 
+    // Handle input changes and update the corresponding state
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -25,6 +31,7 @@ function SignUp() {
         }));
     };
 
+    // Validate the form data
     const validate = () => {
         let validationErrors = {};
         if (!validateEmail(data.email)) validationErrors.email = 'Invalid email format';
@@ -36,6 +43,7 @@ function SignUp() {
         return Object.keys(validationErrors).length === 0;
     };
 
+    // Email validation function
     const validateEmail = (email) => {
         const atIndex = email.indexOf('@');
         const dotIndex = email.lastIndexOf('.');
@@ -43,6 +51,7 @@ function SignUp() {
         return atIndex > 0 && dotIndex > atIndex + 1 && dotIndex < email.length - 1;
     };
 
+    // Asynchronously check if the email already exists in the database
     const checkEmail = async (email) => {
         try {
             const response = await fetch(`/validate-email?email=${email}`);
@@ -54,6 +63,7 @@ function SignUp() {
         }
     };
 
+    // Handle the blur event for the email input to check if the email already exists
     const handleBlur = async (e) => {
         const { name, value } = e.target;
         if (name === 'email') {
@@ -72,16 +82,19 @@ function SignUp() {
         }
     };
 
+    // Name validation function
     const validateName = (name) => {
         const nameRegex = /^[a-zA-Z\s]*$/;
         return nameRegex.test(name);
     };
 
+    // Phone number validation function
     const validatePhoneNumber = (phone) => {
         const phoneRegex = /^\d*$/;
         return phoneRegex.test(phone);
     };
 
+    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -109,7 +122,6 @@ function SignUp() {
                 });
         }
     };
-
 
     return (
         <main className="sign-up-container">
@@ -211,12 +223,9 @@ function SignUp() {
                     <button onClick={() => setShowModal(true)} className="sign-up-btn">
                         Delete me from db
                     </button>
-
                 </div>
                 <DeleteMeModal show={showModal} onHide={() => setShowModal(false)} />
             </footer>
-
-
         </main>
     );
 }
