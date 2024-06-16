@@ -50,7 +50,7 @@ const validatePhoneNumber = (phone) => {
 // Endpoint to handle user signup
 app.post("/signup", (req, res) => {
     const { firstName, lastName } = req.body;
-    console.log(`Registration request: ${req.body}`);
+    console.log(`Registration request: ${JSON.stringify(req.body)}`);
 
     // Validate required fields
     if (!firstName) {
@@ -84,7 +84,7 @@ app.post("/signup", (req, res) => {
 app.delete("/signup", (req, res) => {
     const { email, password } = req.body;
 
-    console.log(`User deletion request: ${req.body}`);
+    console.log(`User deletion request: ${JSON.stringify(req.body)}`);
 
     // Find user by email
     User.findOne({ email }).exec()
